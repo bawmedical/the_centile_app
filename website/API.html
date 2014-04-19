@@ -1,0 +1,155 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+body{
+  color:#444;
+  font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman',
+              "Hiragino Sans GB", "STXihei", "微软雅黑", serif;
+  font-size:12px;
+  line-height:1.5em;
+  background:#fefefe;
+  width: 45em;
+  margin: 10px auto;
+  padding: 1em;
+  outline: 1300px solid #FAFAFA;
+}
+
+a{ color: #0645ad; text-decoration:none;}
+a:visited{ color: #0b0080; }
+a:hover{ color: #06e; }
+a:active{ color:#faa700; }
+a:focus{ outline: thin dotted; }
+a:hover, a:active{ outline: 0; }
+
+span.backtick {
+  border:1px solid #EAEAEA;
+  border-radius:3px;
+  background:#F8F8F8;
+  padding:0 3px 0 3px;
+}
+
+::-moz-selection{background:rgba(255,255,0,0.3);color:#000}
+::selection{background:rgba(255,255,0,0.3);color:#000}
+
+a::-moz-selection{background:rgba(255,255,0,0.3);color:#0645ad}
+a::selection{background:rgba(255,255,0,0.3);color:#0645ad}
+
+p{
+margin:1em 0;
+}
+
+img{
+max-width:100%;
+}
+
+h1,h2,h3,h4,h5,h6{
+font-weight:normal;
+color:#111;
+line-height:1em;
+}
+h4,h5,h6{ font-weight: bold; }
+h1{ font-size:2.5em; }
+h2{ font-size:2em; border-bottom:1px solid silver; padding-bottom: 5px; }
+h3{ font-size:1.5em; }
+h4{ font-size:1.2em; }
+h5{ font-size:1em; }
+h6{ font-size:0.9em; }
+
+blockquote{
+color:#666666;
+margin:0;
+padding-left: 3em;
+border-left: 0.5em #EEE solid;
+}
+hr { display: block; height: 2px; border: 0; border-top: 1px solid #aaa;border-bottom: 1px solid #eee; margin: 1em 0; padding: 0; }
+
+
+pre , code, kbd, samp { 
+  color: #000; 
+  font-family: monospace; 
+  font-size: 0.88em; 
+  border-radius:3px;
+  background-color: #F8F8F8;
+  border: 1px solid #CCC; 
+}
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 5px 12px;}
+pre code { border: 0px !important; padding: 0;}
+code { padding: 0 3px 0 3px; }
+
+b, strong { font-weight: bold; }
+
+dfn { font-style: italic; }
+
+ins { background: #ff9; color: #000; text-decoration: none; }
+
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+ul, ol { margin: 1em 0; padding: 0 0 0 2em; }
+li p:last-child { margin:0 }
+dd { margin: 0 0 0 2em; }
+
+img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+td { vertical-align: top; }
+
+@media only screen and (min-width: 480px) {
+body{font-size:14px;}
+}
+
+@media only screen and (min-width: 768px) {
+body{font-size:16px;}
+}
+
+@media print {
+  * { background: transparent !important; color: black !important; filter:none !important; -ms-filter: none !important; }
+  body{font-size:12pt; max-width:100%; outline:none;}
+  a, a:visited { text-decoration: underline; }
+  hr { height: 1px; border:0; border-bottom:1px solid black; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; padding-right: 1em; page-break-inside: avoid; }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page :left { margin: 15mm 20mm 15mm 10mm; }
+  @page :right { margin: 15mm 10mm 15mm 20mm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+</style><title>API</title></head><body><h1 id="the_centile_app-api-documentation-and-technical-notes"><em>the_centile_app</em> API Documentation and Technical Notes</h1>
+<p><em>note that this documentation is still in development. At present it is actually more of a specification to serve as guidance for those developing the API itself</em></p>
+<h2 id="background">Background</h2>
+<p>Inside <em>the_centile_app</em>, centiles are calculated from raw statistical data about the range of 'normal' heights and weight, derived from the UK90 LMS Tables owned by the Medical Research Council. The MRC have very kindly granted us a free license to use this data to build this public platform which greatly simplifies the work involved in getting a centile out of values for height, weight, age and sex.</p>
+<p>Unfortunately, there is no simple mathematical 'algorithm' at work. Neither is this a simple lookup table, although we may investigate the latter possibility as a means of optimising the app at scale.</p>
+<p>If you wish to fork our project, our app and site code is free and open source however, but not the LMS tables, which are not our property and thereforewe are unable to pass these on with our code. You may well be able to obtain your own licence from the MRC however - they were very straightforward with us.</p>
+<h2 id="terms-of-use">Terms Of Use</h2>
+<p><strong>Free at the point of use</strong> We have built <em>the_centile_app</em> in good faith to provide functionality that does not currently exist on the web, and to benefit patients and medical professionals. The terms of our licence for the data explicitly state that we have been granted a free license in order to produce a free webapp. We believe that this should also include any client applications. At present, <strong>ALL</strong> applications making use of this API should be free and non-commercial (ie no advertising, no fee for use, no membership fees)</p>
+<h2 id="api">API</h2>
+<p><em>the_centile_app</em> exposes its centile calculating functionality as a REST API.</p>
+<p>Submit a HTTP POST request with a JSON payload containing:</p>
+<ul>
+<li>age of patient <strong>in months</strong> (constraints: negative values and values &gt; 480 months will be rejected as these are outside the scope of a paediatric centile calculation. 1 decimal place)</li>
+<li>sex of the patient (the string "M" or "F", everything else will be rejected)</li>
+<li>height/length (eg for a baby) <strong>in metres</strong> (constraints: 1 significant digit, 2 decimal places are <strong>required</strong>)</li>
+<li>weight <strong>in kilograms</strong> (constraints: 3 significant digits, 1 decimal place. Arbitrary maximum value 500)</li>
+</ul>
+<p>If the request is valid, the response from the server will be JSON containing:</p>
+<ul>
+<li>the parameters you submitted in your request (to allow for some closed-loop error checking on the client side and to aid in detection of a server side bug)</li>
+<li>centile value for height/length (integer between 0 and 100)</li>
+<li>centile value for weight (integer between 0 and 100)</li>
+<li>BMI - Body Mass Index corrected for age (numeric with 2 significant digits, 1 decimal place)</li>
+</ul>
+<h2 id="important-notes">Important Notes</h2>
+<ul>
+<li>at present, for various reasons including bandwidth issues, the API allows one request per IP address per 60 seconds.</li>
+</ul>
+<h3 id="less-important-notes">Less Important Notes</h3>
+<ul>
+<li>Head Circumference centile is not currently supported</li>
+<li>API use is logged </li>
+</ul></body></html>
