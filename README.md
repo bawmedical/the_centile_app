@@ -22,7 +22,7 @@ Contributors
 ###Rob Dyke (Tactix4, openGPSoC director)
 * server provisioning
 * N3 hosting kindly donated by Tactix4
-* @robydykedotcom
+* @robdykedotcom
 
 ###Acknowledgements
 * Professor Tim Cole (https://iris.ucl.ac.uk/iris/browse/profile?upi=TCOLE39) who originally developed the LMS tables
