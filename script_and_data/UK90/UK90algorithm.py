@@ -110,7 +110,7 @@ def calculate_centiles_and_context(height,weight,age,sex):
 			heightContext,weightContext,bmiContext]
 
 
-CONTEXT_CENTILES  = [3,5,10,25,50,75,90,95,97]
+CONTEXT_CENTILES  = [97, 95, 90, 75, 50, 25, 10, 5, 3]
 
 if __name__ == "__main__":
 	#grab arguments from command line
