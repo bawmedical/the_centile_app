@@ -5,6 +5,7 @@ the_centile_app
 * website to contain a webapp for calculating centiles
 * explanatory notes and FAQ for parents, technical FAQ, API documentation
 * see website for more details
+* **IMPORTANT: Essential data contained within this app's repository is COPYRIGHTED and is NOT freely distributable. PLEASE ENSURE YOU READ THE LICENSE DOCUMENT FULLY**
 
 Contributors
 ------------
