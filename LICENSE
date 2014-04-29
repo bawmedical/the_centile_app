@@ -1,3 +1,20 @@
+IMPORTANT:
+
+This code consists of two parts:
+1) the openGPSoC the_centile_app code which is open source and distributed under the GNU GPLv3
+2) the UK90 LMS Tables which are copyright of the Medical Research Council and have been licensed to openGPSoC for the development of a free, open source web application to calculate paediatric centiles.
+
+UK90 LMS Chart License
+----------------------
+openGPSoC's the_centile_app application includes access to the UK 1990 reference data which is owned by the Medical Research Council and is subject to copyright. This data may not be disassembled or utilised in any other software or for any other purpose than those contained in the software license.
+
+The data must not be copied or duplicated by any method or used for the production of forms, charts or utilised in any other software application or for any commercial purpose without the express written permission of the Medical Research Council. openGPSoC's the_centile_app application should not be modified nor any additional functionality added to the application without permission.
+
+This license agreement permits the user to utilise the 1990 UK reference data within openGPSoC's the_centile_app for DEVELOPMENT PURPOSES only and all rights not expressly granted are retained and not licensed to you.
+
+the_centile_app LICENSE
+-----------------------
+
 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
