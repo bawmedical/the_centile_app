@@ -15,8 +15,10 @@ purpose than those contained in the software license.
 The data must not be copied or duplicated by any method or used for the production 
 of forms, charts or utilised in any other software application or for any commercial 
 purpose without the express written permission of the Medical Research Council. 
-openGPSoC's the_centile_app application should not be modified nor any additional 
-functionality added to the application without permission.
+openGPSoC's the_centile_app application may be modified and reused according to the terms
+of the GPLv3. If you are going to do this however, it is ENTIRELY YOUR RESPONSIBILITY to 
+ensure that you have appropriately dealt with any licensing issues for the data, by obtaining
+written permission to use the UK90 LMS tables data from the Medical Research Council.
 
 This license agreement permits the user to utilise the 1990 UK reference data within 
 openGPSoC's the_centile_app for DEVELOPMENT PURPOSES only and all rights not expressly 
