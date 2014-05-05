@@ -77,7 +77,7 @@ def calculate_centiles_and_context(height,weight,age,sex):
 	height = float(height) #centimetres
 	weight = float(weight) #kilograms
 	age = round(float(age))    #months if positive, weeks if negative
-	bmi = weight/((height/100)**2)
+	bmi = weight/((height/100.0)**2)
 	# convert sex to 0 or 3 for ease of use in getting data from UK90 table
 	if sex=="M":
 		sex = 0
