@@ -2,6 +2,7 @@
 <html>
 
   <head>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="main.css" >
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400, 800' rel='stylesheet' type='text/css'>
   </head>
@@ -9,10 +10,10 @@
   <body>
     <div class="nav">
       <div class="container">
-      	<ul id="nav-left">
+      	<ul class="pull-left">
       	  <li><a href="#">centile</a></li>
       	</ul>
-      	<ul id="nav-right">
+      	<ul class="pull-right">
       	    <li><a href="#">Why?</a></li>
       	    <li><a href="#">Parent FAQ</a></li>
       	    <li><a href="#">Technical FAQ</a></li>
@@ -23,12 +24,32 @@
     </div>
     
     <div id="central">
-      UK90 Child Growth App
-        <form class="getinput">
-            Sex   : <input type="text" name="Sex"><br>
-            Age   : <input type="text" name="Age"><br>
-            Height: <input type="text" name="Height"><br>
-            Weight: <input type="text" name="Weight">
+      
+        <form class="input-group col-md-4 col-md-offset-4" role="form">
+            <h2 class="form-signin-heading">UK90 Child Growth App</h2>
+
+            <div class="btn-group btn-group-justified">
+              <button type="button" class="btn btn-default">Female</button>
+              <button type="button" class="btn btn-default">Male</button>
+            </div>
+
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon">Age</span>
+              <input type="text" class="form-control" placeholder="Child's Age">
+            </div>
+
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon">Height</span>
+              <input type="text" class="form-control" placeholder="Child's Height">
+            </div>
+
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon">Weight</span>
+              <input type="text" class="form-control" placeholder="Child's Weight">
+            </div>
+            
+            <button class="btn btn-lg btn-primary btn-block" type="centile">Calculate Centile</button>
+
         </form>
     
         <div id="results">

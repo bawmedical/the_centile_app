@@ -3,28 +3,17 @@ body {
   font-weight: normal;
 }
 
-.nav .container {
+.nav li {
   display: inline;
 }
 
-#nav-right{
-  float:right;
-}
-
 .nav a {
-   color: #E86825;
+  color: #E86825;
   font-size: 14px;
-}
-
-.getinput {
-  display:block;
-  position: relative;
-  top: 50px;
-  left: 50px;
+  padding: 14px 10px;
+  text-transform: uppercase;
 }
 
 #central {
-  clear: both;
-  height: 400px;
   background-color: #e8e8e8;
 }
