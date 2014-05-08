@@ -1,25 +1,74 @@
 function calculateCentile(height, weight, age, sex) {
+  // height units - centimetres
+  // weight units - kilograms
+  // age units - MONTHS
+  // sex expressed as string "M" for male, "F" for female
+
+
+  // reassignment of sex parameter to a numeric
+  // rejection of uninterpretable inputs
+  if (sex == "M") {
+    sex = 0;
+  }
+  else if (sex == "F") {
+    sex = 1;
+  }
+  else {
+    raiseError("Sex must be expressed as a string literal - either M for male or F for female");
+    return;
+  }
+
+
+  heightCentile = lmsToCentile(height, getHeightLMS(age, sex));
+  //weightCentile = lmsToCentile(weight, getWeightLMS(age, sex));
+  //bmiCentile    = lmsToCentile(bmi, getBmiLMS(age, sex));
+
+  return heightCentile // weightCentile, bmiCentile];
 
 }
 
-// calculates a percentile value when given the measurement, 
-// and L M S values. Works for any parameter (weight, BMI etc)
-function lmsToCentile(X, L, M, S) {
+function lmsToCentile(X, LMS) {
+
+  // calculates a percentile value when given the measurement, 
+  // and L M S values as an array of the three values eg [L, M, S]
+  // Works for any of the parameters (weight, BMI etc)
+
   // formulae taken from http://www.cdc.gov/growthcharts/percentile_data_files.htm
   // X is the measurement under consideration
   // returns the percentile as a number from 0 to 100
+
+  var L = LMS[0], M = LMS[1], S = LMS[2];
+
   if (L === 0) {
-    zscore = Math.log((X/M)/S)
+    zscore = Math.log((X/M)/S);
   }
   else {
     zscore = ((Math.pow((X/M), L)-1)/(L*S));
   }
-  centile = 100 * cdf(zscore, 0, 1)
+
+  centile = 100 * cdf(zscore, 0, 1);
   // I'm not completely sure why but the parameters from the cdf() function
   // allow mean = 0 and sd = 1 and the results are still correct
   // according to Wolfram Alpha
   
-  return centile
+  return centile;
+}
+
+function getHeightLMS(age, sex) {
+  // need code here to poll DB for height LMS data based on age & sex
+  // should return LMS as an array [L, M, S]
+  // (hard-coded here for testing)
+  return [1, 103.06, 0.04021]
+}
+
+function getWeightLMS(age, sex) {
+  // need code here to poll DB for weight LMS data based on age & sex
+  // should return LMS as an array [L, M, S]
+}
+
+function getBmiLMS(age, sex) {
+  // need code here to poll DB for BMI LMS data based on age & sex
+  // should return LMS as an array [L, M, S]
 }
 
 // calculates the Error Function of a normal(Z) distribution
@@ -66,10 +115,14 @@ function cdf(x, mean, std) {
   return 0.5 * (1 + erf((x - mean) / Math.sqrt(2 * std * std)));
 }
 
-
+function raiseError(message) {
+  alert(message);
+  console.log(message);
+}
 //for testing this payload is the 50th centile for both height
 //and weight for a 4 year old (48 month old) male:
 //calculateCentile(102.49, 16.551, 48, "M")
 
-console.log(lmsToCentile(102.06, 1, 103.06, 0.04021))
+console.log(lmsToCentile(102.06, [1, 103.06, 0.04021]))
+console.log(calculateCentile(102.06, 5, 48, "M"))
 
