@@ -10,12 +10,13 @@ var calcAge = function(y,m,w) {
 var getStats = function(ewd,age) {
 	if (!centileXIx) var centileXIx = new ewd.mumps.GlobalNode("cpcCentile", ["CentileIx","age"]);
 	if (!centileIx) var centileIx = new ewd.mumps.GlobalNode("cpcCentile", ["Centile"]);
-		if (centileXIx.$(age)._hasValue) {
+	if (centileXIx.$(age)._hasValue) {
 			var next=age;
 		}
 		else {
 			var next = centileXIx._next(age);
 		};
+		
 		var id = centileXIx.$(next)._value;
 		ewd.log('-------------- Next = '+next,1);
 		ewd.log('-------------- Age = '+age,1);
@@ -35,6 +36,7 @@ module.exports = {
 	},
 	getCentileByHeight: function(ewd,AgeY,AgeM,AgeW,HeightM,Sex) {
 		var age=calcAge(+AgeY,+AgeM,+AgeW);
+		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 401}};
 		var stats=getStats(ewd,age);
 		var LMSin=[];
 		if (Sex==='Male') {
@@ -49,6 +51,7 @@ module.exports = {
 	},
 	getCentileByWeight: function(ewd,AgeY,AgeM,AgeW,WeightK,Sex) {
 		var age=calcAge(+AgeY,+AgeM,+AgeW);
+		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 401}};
 		var stats=getStats(ewd,age);
 		var LMSin=[];
 		if (Sex==='Male') {
@@ -70,6 +73,7 @@ module.exports = {
 		},
 	getCentileByBMI: function(ewd,AgeY,AgeM,AgeW,BMI,Sex) {
 		var age=calcAge(+AgeY,+AgeM,+AgeW);
+		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 401}};
 		var stats=getStats(ewd,age);
 		var LMSin=[];
 		if (Sex==='Male') {
@@ -82,5 +86,32 @@ module.exports = {
 		ewd.log('---------------- '+JSON.stringify(LMSin),1);
 		return {"Centile": UK90centile.lmsToCentile(BMI,LMSin)};
 	},
+	getAllCentiles: function(ewd,AgeY,AgeM,AgeW,WeightK,HeightM,Sex) {
+		var age=calcAge(+AgeY,+AgeM,+AgeW);
+		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 401}};
+		var stats=getStats(ewd,age);
+		var BMI=this.getBMI(ewd,WeightK,HeightM).BMI;
+		var LMSin=[],LMSin2=[],LMSin3=[];
+		if (Sex==='Male') {
+			LMSin=[stats.Height_Male_L,stats.Height_Male_M,stats.Height_Male_S];
+			LMSin2=[stats.Weight_Male_L,stats.Weight_Male_M,stats.Weight_Male_S];
+			LMSin3=[stats.BMI_Male_L,stats.BMI_Male_M,stats.BMI_Male_S];
+		}
+		else
+		{
+			LMSin=[stats.BMI_Female_L,stats.BMI_Female_M,stats.BMI_Female_S];
+			LMSin2=[stats.Weight_Female_L,stats.Weight_Female_M,stats.Weight_Female_S];
+			LMSin3=[stats.BMI_Female_L,stats.BMI_Female_M,stats.BMI_Female_S];
+		}
+		var retObj=UK90centile.lmsToCentile(HeightM*100,LMSin);
+		var retObj2=UK90centile.lmsToCentile(WeightK,LMSin2);
+		var retObj3=UK90centile.lmsToCentile(BMI,LMSin3);
+		return {
+			HeightStats:retObj,
+			WeightStats:retObj2,
+			BMI:BMI,
+			BMIStats:retObj3
+		};
+	}
 
 };
