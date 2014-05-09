@@ -1,7 +1,7 @@
 the_centile_app
 ===============
 * a suite of tools for calculating paediatric growth centiles from LMS statistical tables.
-** CDC directory contains (mostly deprecated) code for calculating centiles from the freely available US CDC LMS tables, we mainly used this for initial development before our licanse application with the MRC UK came through.
+    * CDC directory contains (mostly deprecated) code for calculating centiles from the freely available US CDC LMS tables, we mainly used this for initial development before our licanse application with the MRC UK came through.
 ** UK90 directory contains code for calculating centiles from the UK90 LMS tables:
 *** UK90.js - javascript/node.js implementation
 *** UK90.py - python implementation
