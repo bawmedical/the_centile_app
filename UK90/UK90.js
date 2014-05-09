@@ -122,14 +122,6 @@ function raiseError(message) {
   console.log(message);
 }
 
-// for testing this payload is the 50th centile for both height
-// and weight for a 4 year old (48 month old) male:
-// calculateCentile(102.49, 16.551, 48, "M")
-
-//console.log(contextMeasurements([1, 103.06, 0.04021]))
-//console.log(calculateCentile(102.06, 5, 48, "M"))
-
-
 function contextMeasurements(LMS, contextCentiles) {
   // calculates some measurements at a range of percentiles, given the
   // LMS values and an optional argument contextCentiles (see below)
@@ -158,20 +150,17 @@ function contextMeasurements(LMS, contextCentiles) {
     }
     contextValues.push(measurement);
   }
-
   return contextValues;
-
 }
 
-module.exports = {
-	lmsToCentile: function(X, LMS) {
-  	// calculates a percentile value when given the measurement, 
-  	// and L M S values as an array of the three values eg [L, M, S]
-  	// Works for any of the parameters (weight, BMI etc)
-  	
-  	// formulae taken from http://www.cdc.gov/growthcharts/percentile_data_files.htm
-  	// X is the measurement under consideration
-  	// returns the percentile as a number from 0 to 100
+function lmsToCentile(X, LMS) {
+    // calculates a percentile value when given the measurement, 
+    // and L M S values as an array of the three values eg [L, M, S]
+    // Works for any of the parameters (weight, BMI etc)
+    
+    // formulae taken from http://www.cdc.gov/growthcharts/percentile_data_files.htm
+    // X is the measurement under consideration
+    // returns the percentile as a number from 0 to 100
 
     // unpack LMS into separate variables
     var L = LMS[0], M = LMS[1], S = LMS[2];
@@ -184,11 +173,23 @@ module.exports = {
     };
 
     centile = 100 * cdf(zscore, 0, 1);
-  	// I'm not completely sure why but the parameters from the cdf() function
-  	// allow mean = 0 and sd = 1 and the results are still correct
-  	// according to Wolfram Alpha
     
     return centile;
   }
+
+module.exports = {
+  getData: function(X, LMS, contextCentiles) {
+    return {
+      Centile: lmsToCentile(X, LMS),
+      Context: contextMeasurements(LMS, contextCentiles)
+    }
+  }
 };
 
+// for testing this payload is the 50th centile for both height
+// and weight for a 4 year old (48 month old) male:
+// calculateCentile(102.49, 16.551, 48, "M")
+
+//console.log(contextMeasurements([1, 103.06, 0.04021]))
+//console.log(calculateCentile(102.06, 5, 48, "M"))
+//console.log(getData(102.06, [1, 103.06, 0.04021]))
