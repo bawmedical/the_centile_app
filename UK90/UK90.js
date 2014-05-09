@@ -138,7 +138,7 @@ function contextMeasurements(LMS, contextCentiles) {
   if (typeof contextCentiles === 'undefined') {
     contextCentiles = [0.03, 0.05, 0.10, 0.25, 0.50, 0.75, 0.90, 0.95, 0.97];
   }
-  var contextValues = []
+  var contextValues = {};
 
   for (var i = 0; i < contextCentiles.length; i++) {
     zscore = invcdf(contextCentiles[i], 0, 1)
@@ -148,7 +148,8 @@ function contextMeasurements(LMS, contextCentiles) {
     else {
       measurement = M*(Math.pow((1+L*S*zscore),(1/L)));
     }
-    contextValues.push(measurement);
+    //contextValues.push(measurement);
+	contextValues[''+(contextCentiles[i]*100)+'%']=measurement;
   }
   return contextValues;
 }

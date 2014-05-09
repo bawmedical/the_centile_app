@@ -65,7 +65,7 @@ module.exports = {
 			LMSin=[stats.Height_Female_L,stats.Height_Female_M,stats.Height_Female_S] 
 		}
 		ewd.log('---------------- '+JSON.stringify(LMSin),1);
-		return {"Centile": UK90centile.lmsToCentile(HeightM*100,LMSin)};
+		return UK90centile.getData(HeightM*100,LMSin);
 	},
 	getCentileByWeight: function(ewd,AgeY,AgeM,AgeW,WeightK,Sex) {
 		var age=calcAge(+AgeY,+AgeM,+AgeW);
@@ -80,11 +80,7 @@ module.exports = {
 			LMSin=[stats.Weight_Female_L,stats.Weight_Female_M,stats.Weight_Female_S] 
 		}
 		ewd.log('---------------- '+WeightK+',  '+JSON.stringify(LMSin),1);
-		return {
-			"Centile": UK90centile.lmsToCentile(WeightK,LMSin),
-			"InputWeight": WeightK,
-			"InputLMS": LMSin
-		};
+		return UK90centile.getData(WeightK,LMSin);
 	},
 	getBMI: function(ewd,WeightK,HeightM) {
 			return {"BMI": WeightK/(Math.pow(HeightM,2))};
@@ -102,7 +98,7 @@ module.exports = {
 			LMSin=[stats.BMI_Female_L,stats.BMI_Female_M,stats.BMI_Female_S] 
 		}
 		ewd.log('---------------- '+JSON.stringify(LMSin),1);
-		return {"Centile": UK90centile.lmsToCentile(BMI,LMSin)};
+		return UK90centile.getData(BMI,LMSin);
 	},
 	getAllCentiles: function(ewd,AgeY,AgeM,AgeW,WeightK,HeightM,Sex) {
 		var age=calcAge(+AgeY,+AgeM,+AgeW);
@@ -121,9 +117,9 @@ module.exports = {
 			LMSin2=[stats.Weight_Female_L,stats.Weight_Female_M,stats.Weight_Female_S];
 			LMSin3=[stats.BMI_Female_L,stats.BMI_Female_M,stats.BMI_Female_S];
 		}
-		var retObj=UK90centile.lmsToCentile(HeightM*100,LMSin);
-		var retObj2=UK90centile.lmsToCentile(WeightK,LMSin2);
-		var retObj3=UK90centile.lmsToCentile(BMI,LMSin3);
+		var retObj=UK90centile.getData(HeightM*100,LMSin);
+		var retObj2=UK90centile.getData(WeightK,LMSin2);
+		var retObj3=UK90centile.getData(BMI,LMSin3);
 		return {
 			HeightStats:retObj,
 			WeightStats:retObj2,
