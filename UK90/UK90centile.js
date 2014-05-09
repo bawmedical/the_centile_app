@@ -27,32 +27,7 @@ function calculateCentile(height, weight, age, sex) {
 
 }
 
-function lmsToCentile(X, LMS) {
 
-  // calculates a percentile value when given the measurement, 
-  // and L M S values as an array of the three values eg [L, M, S]
-  // Works for any of the parameters (weight, BMI etc)
-
-  // formulae taken from http://www.cdc.gov/growthcharts/percentile_data_files.htm
-  // X is the measurement under consideration
-  // returns the percentile as a number from 0 to 100
-
-  var L = LMS[0], M = LMS[1], S = LMS[2];
-
-  if (L === 0) {
-    zscore = Math.log((X/M)/S);
-  }
-  else {
-    zscore = ((Math.pow((X/M), L)-1)/(L*S));
-  }
-
-  centile = 100 * cdf(zscore, 0, 1);
-  // I'm not completely sure why but the parameters from the cdf() function
-  // allow mean = 0 and sd = 1 and the results are still correct
-  // according to Wolfram Alpha
-  
-  return centile;
-}
 
 function getHeightLMS(age, sex) {
   // need code here to poll DB for height LMS data based on age & sex
@@ -122,7 +97,34 @@ function raiseError(message) {
 //for testing this payload is the 50th centile for both height
 //and weight for a 4 year old (48 month old) male:
 //calculateCentile(102.49, 16.551, 48, "M")
-
+/*
 console.log(lmsToCentile(102.06, [1, 103.06, 0.04021]))
 console.log(calculateCentile(102.06, 5, 48, "M"))
+*/
+module.exports = {
+	lmsToCentile: function(X, LMS) {
+	// calculates a percentile value when given the measurement, 
+	// and L M S values as an array of the three values eg [L, M, S]
+	// Works for any of the parameters (weight, BMI etc)
+	
+	// formulae taken from http://www.cdc.gov/growthcharts/percentile_data_files.htm
+	// X is the measurement under consideration
+	// returns the percentile as a number from 0 to 100
 
+  var L = LMS[0], M = LMS[1], S = LMS[2];
+
+  if (L === 0) {
+    zscore = Math.log((X/M)/S);
+  }
+  else {
+    zscore = ((Math.pow((X/M), L)-1)/(L*S));
+  };
+
+  centile = 100 * cdf(zscore, 0, 1);
+	// I'm not completely sure why but the parameters from the cdf() function
+	// allow mean = 0 and sd = 1 and the results are still correct
+	// according to Wolfram Alpha
+  
+  return centile;
+}
+};
