@@ -1,13 +1,18 @@
+body {
+  background-image: url('images/bokeh_growth_chart.png');
+  background-position: center; 
+  background-color: #E8C5E0;
+}
+
 #content {
   font-family: 'Open Sans', sans-serif;
   font-weight: normal;
   width: 1000px;
   margin: 0px auto ;
-  border: 1px #000
 }
 
 .nav {
-  background-color: #FFD19F;
+  background-color: #FBE1ED;
   border-radius: 10px;
 }
 
@@ -15,11 +20,14 @@
   display: inline;
 }
 
+.nav a {
+  color: #ED95C1;
+}
+
 .nav ul.pull-right {
   margin-top: 20px;
 }
 .nav .pull-right a {
-  color: #E86825;
   font-size: 20px;
   padding: 15px 10px;
 }
@@ -29,8 +37,11 @@
 }
 
 .nav .pull-left a {
-  color: #E86825;
   font-size: 48px;
   font-family: Georgia;
   padding-left: 0px;
+}
+
+.filler {
+  height: 200px;
 }

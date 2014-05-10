@@ -16,6 +16,7 @@ $( document ).ready(function() {
 
   $("#why-link").click(function() {
     $("#why").slideToggle();
+    $(".filler").slideToggle();
   });
 
 });
