@@ -12,10 +12,17 @@ $( document ).ready(function() {
 
   $("#why").hide()
   $("#results").hide()
+  $("#thanks").hide()
+
 
 
   $("#why-link").click(function() {
     $("#why").slideToggle();
+    $(".filler").slideToggle();
+  });
+
+  $("thanks-link").click(function() {
+    $("#thanks").slideToggle();
     $(".filler").slideToggle();
   });
 
