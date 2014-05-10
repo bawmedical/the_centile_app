@@ -1,19 +1,36 @@
-body {
+#content {
   font-family: 'Open Sans', sans-serif;
   font-weight: normal;
+  width: 1000px;
+  margin: 0px auto ;
+  border: 1px #000
+}
+
+.nav {
+  background-color: #FFD19F;
+  border-radius: 10px;
 }
 
 .nav li {
   display: inline;
 }
 
-.nav a {
+.nav ul.pull-right {
+  margin-top: 20px;
+}
+.nav .pull-right a {
   color: #E86825;
-  font-size: 14px;
-  padding: 14px 10px;
-  text-transform: uppercase;
+  font-size: 20px;
+  padding: 15px 10px;
 }
 
 #central {
   background-color: #e8e8e8;
+}
+
+.nav .pull-left a {
+  color: #E86825;
+  font-size: 48px;
+  font-family: Georgia;
+  padding-left: 0px;
 }

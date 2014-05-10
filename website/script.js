@@ -10,4 +10,12 @@ $( document ).ready(function() {
 
   $( "#calculate-centile" ).click( displayVals() );
 
+  $("#why").hide()
+  $("#results").hide()
+
+
+  $("#why-link").click(function() {
+    $("#why").slideToggle();
+  });
+
 });
