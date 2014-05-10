@@ -1,20 +1,40 @@
 $( document ).ready(function() {
-  //quick - hide everything!
+  //quick - someone's coming - hide everything!
   $("#why, #results, #thanks").hide();
+  var patientSex = $('form input[name=radios]:checked').val();
+  setColourScheme();
   
-  function toggleColourScheme() {
-    //code to switch between blue & pink 
-  }
+  //page striptease slow toggles
+  $("#why-link").click(function() {
+    $("#why").slideToggle("slow");
+    $(".filler").slideToggle();
+  });
+  $("#thanks-link").click(function() {
+    $("#thanks").slideToggle("slow");
+  });
+
+  function setColourScheme() {
+    //toggle colour scheme for boys/girls
+    if (patientSex == "Male") {
+      $("body").css({backgroundImage: "url('images/bokeh_growth_chart_boys.jpg')"});
+      $(".nav").css({backgroundColor: "#C2E3F1"});
+      $(".nav a").css({color: "#58A9F1"});
+    }
+    else {
+      $("body").css({backgroundImage: "url('images/bokeh_growth_chart_girls.jpg')"});
+      $(".nav").css({backgroundColor: "#FBE1ED"});
+      $(".nav a").css({color: "#ED95C1"});
+    }
+  };
 
   //to suppress automatic page reload on submitting form
   $('#centileform').submit(function () {
     return false;
   });
 
-  var patientSex = "Female"; //this is the default value as set in the HTML definition of the radio buttons
   $("#patient-sex input").on("click", function(){
     patientSex = $(this).attr('value');
-    toggleColourScheme();
+    setColourScheme();
   });
 
   $( "#calculate-centile" ).click( function() {
@@ -46,21 +66,4 @@ $( document ).ready(function() {
       $("#results").slideDown("slow");
     });
   });
-
-
-  $("#why-link").click(function() {
-    $("#why").slideToggle();
-    $(".filler").slideToggle();
-  });
-
-  $("thanks-link").click(function() {
-    $("#thanks").slideToggle();
-    $(".filler").slideToggle();
-  });
-
-  $.ajax({
-    url: "http://ec2-54-237-33-114.compute-1.amazonaws.com:8020/ec2/Centile/swagger/",
-
-  });
-
 });

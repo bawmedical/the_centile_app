@@ -1,6 +1,7 @@
 body {
-  background-image: url('images/bokeh_growth_chart.png');
   background-position: center; 
+  background-size: cover;
+  background-repeat: none;
   background-color: #E8C5E0;
 }
 
@@ -14,6 +15,7 @@ body {
 .nav {
   background-color: #FBE1ED;
   border-radius: 10px;
+  margin-top: 15px;
 }
 
 .nav li {
@@ -30,10 +32,7 @@ body {
 .nav .pull-right a {
   font-size: 20px;
   padding: 15px 10px;
-}
-
-#central {
-  background-color: #e8e8e8;
+  margin-right: 40px;
 }
 
 .nav .pull-left a {
@@ -56,4 +55,17 @@ body {
 
 .results-table {
   margin: 0px auto;
+}
+
+footer li {
+  display: inline;
+  padding: 15px 10px;
+  margin-bottom: 40px;
+}
+
+.legals {
+  margin-top: 40px;
+  font-size: 10px;
+  text-align: center;
+  padding: 5px;
 }
