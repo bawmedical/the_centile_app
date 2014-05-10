@@ -42,6 +42,18 @@ body {
   padding-left: 0px;
 }
 
+#paypal-donate {
+  text-align: center;
+}
+
 .filler {
-  height: 200px;
+  height: 150px;
+}
+
+.small-filler {
+  height: 50px;
+}
+
+.results-table {
+  margin: 0px auto;
 }

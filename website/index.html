@@ -46,17 +46,37 @@
             <li>new and better ways of visualising centile measurements may be developed</li>
           </ul>
         <h2>Why has nobody done this before?</h2>
-        <p>Good question. We know from discussions we have had that simple centile calculation functionality like this was requested as far back as 1995. Perhaps the main reason that this had not been done before by independent app devlopers is that the centiles are calculated from the UK90 LMS data which is the property and copyright of the Medical Research Council, and a license is required to use the data. openGPSoC, not being deterred, approached them and asked for a license to use the data, which they gave us. As to why the NHS, with its multi-billion-pound IT budget could not </p>
+        <p>Good question. We know from discussions we have had that simple centile calculation functionality like this was requested as far back as 1995. Perhaps the main reason that this had not been done before by independent app devlopers is that the centiles are calculated from the UK90 LMS data which is the property and copyright of the Medical Research Council, and a license is required to use the data. openGPSoC, not being deterred, approached them and asked for a license to use the data, which they gave us. As to why the NHS, with its multi-billion-pound IT budget could not have done this... well, you'd have to ask them.</p>
       </div>
 
       <div id="parents">
       </div>  
 
-     
-      <div id="form">
-        <div class="filler"></div>
-          
+      <div class="filler"></div>
 
+      <div id="results">
+        <table class="table results-table">
+          <tr>
+            <td>Height Centile:</td>
+            <td id="heightcentile"></td>
+          </tr>
+          <tr>
+            <td>Weight Centile:</td>
+            <td id="weightcentile"></td>
+          </tr>
+          <tr>
+            <td>Body Mass Index (BMI):</td>
+            <td id="bmi"></td>
+          </tr>
+          <tr>
+            <td>BMI Centile:</td>
+            <td id="bmicentile"></td>
+          </tr>
+        </table>
+        <div class="small-filler"></div>
+      </div>
+
+      <div id="centileform">
           <div class="control-group">
             <form class="form-horizontal">
               <fieldset>
@@ -67,13 +87,13 @@
               <!-- Multiple Radios (inline) -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="radios">Sex</label>
-                <div class="col-md-4"> 
+                <div class="col-md-4" id="patient-sex"> 
                   <label class="radio-inline" for="radios-0">
-                    <input name="radios" id="radios-0" value="F" checked="checked" type="radio">
+                    <input name="radios" id="radios-0" value="Female" checked="checked" type="radio">
                     F
                   </label> 
                   <label class="radio-inline" for="radios-1">
-                    <input name="radios" id="radios-1" value="M" type="radio">
+                    <input name="radios" id="radios-1" value="Male" type="radio">
                     M
                   </label>
                 </div>
@@ -81,10 +101,10 @@
 
               <!-- Appended Input-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="appendedtext">Age</label>
-                <div class="col-md-6">
+                <label class="col-md-4 control-label" for="appendedtext">Age (months)</label>
+                <div class="col-md-4">
                   <div class="input-group">
-                    <input id="appendedtext" name="appendedtext" class="form-control" placeholder="age in months" required="" type="text">
+                    <input id="patient-age" name="appendedtext" class="form-control" placeholder="age in months" required="" type="text">
                     <span class="input-group-addon">months</span>
                   </div>
                   
@@ -93,9 +113,9 @@
               <!-- Appended Input-->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="appendedtext">Height</label>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="input-group">
-                    <input id="appendedtext" name="appendedtext" class="form-control" placeholder="height in centimetres" type="text">
+                    <input id="patient-height" name="appendedtext" class="form-control" placeholder="height in centimetres" type="text">
                     <span class="input-group-addon">centimetres</span>
                   </div>
                   
@@ -104,9 +124,9 @@
               <!-- Appended Input-->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="appendedtext">Weight</label>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="input-group">
-                    <input id="appendedtext" name="appendedtext" class="form-control" placeholder="weight in kilograms" type="text">
+                    <input id="patient-weight" name="appendedtext" class="form-control" placeholder="weight in kilograms" type="text">
                     <span class="input-group-addon">kilograms</span>
                   </div>
                   
@@ -116,14 +136,27 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="singlebutton"></label>
                 <div class="col-md-4">
-                  <button id="singlebutton" name="singlebutton" class="btn btn-lg btn-default btn-block">Calculate Centile</button>
+                  <button id="calculate-centile" name="singlebutton" class="btn btn-lg btn-default btn-block">Calculate Centile</button>
                 </div>
               </div>
 
               </fieldset>
-              </form>
+            </form>
+          </div>
+        </div> 
 
         <div class="filler"></div>
+
+        <div id="paypal-donate">
+          <p>centile is a free service provided by the non-profit organisation openGPSoC(CIC).</p>
+          <p>If you would like new features, new apps and just generally more Awesome, then please consider donating in order to help cover our costs.</p>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="2RWGK8VXT86XU">
+            <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+          </form>
+        </div>
         <div class="filler"></div>
 
       </div>
