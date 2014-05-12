@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.min.css" rel="stylesheet" />
+    <link href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+
+	    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="//ematic-solutions.com/cdn/bootstrap/2.3.1/ico/favicon.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="//ematic-solutions.com/cdn/bootstrap/2.3.1/ico/apple-touch-icon-144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="//ematic-solutions.com/cdn/bootstrap/2.3.1/ico/apple-touch-icon-114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="//ematic-solutions.com/cdn/bootstrap/2.3.1/ico/apple-touch-icon-72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="//ematic-solutions.com/cdn/bootstrap/2.3.1/ico/apple-touch-icon-57-precomposed.png" />
+
+    <script src="/socket.io/socket.io.js"></script>
+    <!--[if (IE 6)|(IE 7)|(IE 8)]><script type="text/javascript" src="//ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script><![endif]-->
+
+    <link rel="stylesheet" href="main.css" >
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400, 800' rel='stylesheet' type='text/css'>
+  </head>
+  
+  <body>
+    <div id="content">
+      <div class="nav nav-pills">
+        	<ul class="pull-left">
+        	  <li><a href="index.html">centile</a></li>
+        	</ul>
+        	<ul class="pull-right">
+        	    <li><a href="#" id="why-link">WHY?</a></li>
+              <li><a href="#" id="parents-link">PARENTS</a></li>
+        	    <li><a href="#" id="team-link">TEAM</a></li>
+              <li><a href="#" id="references-link">REFERENCES</a></li>
+        	</ul>
+      </div>
+      
+      <div id="why">
+        </br>
+        <p>Until now, the only way to work out a child's growth centile was to use a traditional paper <a href="http://www.rcpch.ac.uk/growthcharts" target="_blank">centile chart</a>. Some general practice computer systems include growth charts of a sort, but these don't actually work out a centile for you - they just plot height or weight on a picture of a growth chart, leaving the user to estimate the actual number.</p>
+        <h2>The disadvantages of paper/visual charts are:</h2>
+          <ul>
+            <li>it's actually not that accurate and is prone to visual tracking errors</li>
+            <li>using a paper chart designed for multiple measurements means it's actually a problem to deal with the document in most paperless GP systems - once it's been scanned for storage, it can't then be updated with new centile measurements (unless you are truly crazy, and print out the old one, add new data, and scan it in again... madness)</li>
+            <li>the actual centile number was never in a form that could be automatically saved into a GP system, coded and the data used in better ways</li>
+            <li>It also meant that we tended to use the chart as the sole method of visualisation of the data over time, failing to separate the means of calculation from the means of presentation. Just because we need the chart to calculate</li>
+          </ul>
+        
+        <p>We at openGPSoC thought it was important that clinicians and parents could find out this simple information in a much more modern way.</p>
+
+        <h2>Advantages of a computerized centile calculation engine:</h2>
+          <ul>
+            <li>we can calculate the centile to a higher accuracy.</li>
+            <li>data is in a computable form and can be saved as coded data in GP and other paperless record systems</li>
+            <li>the data can be consumed in a variety of ways - as a mobile app, in a browser, by third party applications via the API</li>
+            <li>new and better ways of visualising centile measurements may be developed</li>
+          </ul>
+        <h2>Why has nobody done this before?</h2>
+        <p>Good question. We know from discussions we have had that simple centile calculation functionality like this was requested as far back as 1995. Perhaps the main reason that this had not been done before by independent app devlopers is that the centiles are calculated from the UK90 LMS data which is the property and copyright of the Medical Research Council, and a license is required to use the data. openGPSoC, not being deterred, approached them and asked for a license to use the data, which they gave us. As to why the NHS, with its multi-billion-pound IT budget could not have done this... well, you'd have to ask them.</p>
+      </div>
+
+      <div id="parents">
+      </div>  
+
+      <div class="filler"></div>
+
+      <div id="results">
+        <table class="table results-table">
+          <tr>
+            <td>Height Centile:</td>
+            <td id="heightcentile"></td>
+          </tr>
+          <tr>
+            <td>Weight Centile:</td>
+            <td id="weightcentile"></td>
+          </tr>
+          <tr>
+            <td>Body Mass Index (BMI):</td>
+            <td id="bmi"></td>
+          </tr>
+          <tr>
+            <td>BMI Centile:</td>
+            <td id="bmicentile"></td>
+          </tr>
+        </table>
+        <div class="small-filler"></div>
+      </div>
+
+      <div id="centileform">
+          <div class="control-group">
+            <form class="form-horizontal">
+              <fieldset>
+
+              <!-- Form Name -->
+              <legend>calculate a centile</legend>
+
+              <!-- Multiple Radios (inline) -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="radios">Sex</label>
+                <div class="col-md-4" id="patient-sex"> 
+                  <label class="radio-inline" for="radios-0">
+                    <input name="radios" id="radios-0" value="Female" type="radio">
+                    F
+                  </label> 
+                  <label class="radio-inline" for="radios-1">
+                    <input name="radios" id="radios-1" value="Male" type="radio">
+                    M
+                  </label>
+                </div>
+              </div>
+
+              <!-- Appended Input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="appendedtext">Age (months)</label>
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <input id="patient-age" name="appendedtext" class="form-control" placeholder="age in months" required="" type="text">
+                    <span class="input-group-addon">months</span>
+                  </div>
+                  
+                </div>
+              </div>
+              <!-- Appended Input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="appendedtext">Height</label>
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <input id="patient-height" name="appendedtext" class="form-control" placeholder="height in centimetres" type="text">
+                    <span class="input-group-addon">centimetres</span>
+                  </div>
+                  
+                </div>
+              </div>
+              <!-- Appended Input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="appendedtext">Weight</label>
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <input id="patient-weight" name="appendedtext" class="form-control" placeholder="weight in kilograms" type="text">
+                    <span class="input-group-addon">kilograms</span>
+                  </div>
+                  
+                </div>
+              </div>
+              <!-- Button -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4">
+                  <button id="calculate-centile" name="singlebutton" class="btn btn-lg btn-default btn-block">Calculate Centile</button>
+                </div>
+              </div>
+
+              </fieldset>
+            </form>
+          </div>
+        </div> 
+
+        <div class="filler"></div>
+
+        <div id="paypal-donate">
+          <p><large>centile</large> is a free service provided by the non-profit organisation openGPSoC(CIC).</p>
+          <p>If you would like new features, new apps and just generally more Awesome Stuff, then please consider donating in order to help cover our costs.</p>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="2RWGK8VXT86XU">
+            <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+          </form>
+        </div>
+        <div class="filler"></div>
+    
+      <div id="thanks">
+        <h2>Thanks and Acknowledgements</h2>
+          <p>First and foremost we would like to extend our thanks to the Medical Research Council and in particular Professor Tim Cook for allowing openGPSoC to have a licence to use the UK90 LMS tables in the_centile_app</p>
+          <h3>Other thanks, in no particular order:</h3>
+          <ul>
+            <li>Jade Onakunle and Santa Eglite at the MRC, with whom we communicated while organising the licence - thanks, you made the process very straightforward</li>
+            <li>NHS Hack Day and its fantastic community</li>
+          </ul>
+      </div>
+
+      <footer>
+        <ul>
+          <li><a href="http://bawmedical.co.uk/2014/05/10/centiles-doing-them-in-code-part-1/">TECHNICAL INFO</a></li>
+          <li><a id="thanks-link">THANKS AND ACKNOWLEDGEMENTS</a></li>
+        <ul>
+        <p class="legals">Application code, API code, and written content &copy; copyright 2014 openGPSoC(CIC) a UK Community Interest Company dedicated to open source in the NHS. Company Number 08266350. All software is open source and licensed under GPLv3 license. All other intellectual property is licensed under the CC-BY-SA Creative Commons License.<p>
+        <p class="legals">The UK90 LMS Data used by this application to calculate centiles is copyright of the Medical Research Council and used by openGPSoC under license.<p>
+      </footer>
+
+    </div>
+	
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.min.js"></script>
+    <script src="/ewdLite/EWD.js"></script>
+    <script type="text/javascript" src="/ewdLite/ewdBootstrap3.js"></script>
+
+    <script type="text/javascript" src="script.js"></script>
+
+  </body>
+  
+</html>

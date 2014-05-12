@@ -28,6 +28,8 @@ var calcAge = function(y,m,w) {
 var getStats = function(ewd,age) {
 	if (!centileXIx) var centileXIx = new ewd.mumps.GlobalNode("cpcCentile", ["CentileIx","age"]);
 	if (!centileIx) var centileIx = new ewd.mumps.GlobalNode("cpcCentile", ["Centile"]);
+	if (!centileCount) var centileCount = new ewd.mumps.GlobalNode("cpcCentile", ["Count"]);
+	centileCount._value = centileCount._value+1;
 	if (centileXIx.$(age)._hasValue) {
 			var next=age;
 		}
@@ -42,6 +44,27 @@ var getStats = function(ewd,age) {
 		return centileIx.$(id)._getDocument();
 };
 module.exports = {
+
+	onSocketMessage: function(ewd) {
+		var wsMsg = ewd.webSocketMessage;
+		var type = wsMsg.type;
+		var params = wsMsg.params;
+		if (type === 'getCentiles') {
+			if (!params.sex) return {error:'You must select a Sex'};
+			if (params.ageInYears === '') return {error:'You must enter an age'};
+			if (!params.weightInKg) return {error:'You must enter a weight'};
+			if (!params.heightInM) return {error:'You must enter a height'};
+			var result=this.getAllCentiles(ewd,params.ageInYears,params.ageInMonths,0,params.weightInKg,params.heightInM,params.sex);
+			var error=result.error;
+			if (error) return error;
+			ewd.sendWebSocketMsg({
+			  type: 'getCentiles',
+			  message: result
+			});
+			return;
+		};
+
+	},
 	//external call - check reload
 	swagger: function(ewd,path) {
 		if (!hDocsix) var hDocsix = new ewd.mumps.GlobalNode("cpcCentile", ["Documentation"]);	
@@ -54,7 +77,7 @@ module.exports = {
 	},
 	getCentileByHeight: function(ewd,AgeY,AgeM,AgeW,HeightM,Sex) {
 		var age=calcAge(+AgeY,+AgeM,+AgeW);
-		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 401}};
+		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 400}};
 		var stats=getStats(ewd,age);
 		var LMSin=[];
 		if (Sex==='Male') {
@@ -69,7 +92,7 @@ module.exports = {
 	},
 	getCentileByWeight: function(ewd,AgeY,AgeM,AgeW,WeightK,Sex) {
 		var age=calcAge(+AgeY,+AgeM,+AgeW);
-		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 401}};
+		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 400}};
 		var stats=getStats(ewd,age);
 		var LMSin=[];
 		if (Sex==='Male') {
@@ -87,7 +110,7 @@ module.exports = {
 		},
 	getCentileByBMI: function(ewd,AgeY,AgeM,AgeW,BMI,Sex) {
 		var age=calcAge(+AgeY,+AgeM,+AgeW);
-		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 401}};
+		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 400}};
 		var stats=getStats(ewd,age);
 		var LMSin=[];
 		if (Sex==='Male') {
@@ -102,7 +125,7 @@ module.exports = {
 	},
 	getAllCentiles: function(ewd,AgeY,AgeM,AgeW,WeightK,HeightM,Sex) {
 		var age=calcAge(+AgeY,+AgeM,+AgeW);
-		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 401}};
+		if (age <0 || age > 23) return {error: {text: 'Age must be between 0 and 23', statuscode: 400}};
 		var stats=getStats(ewd,age);
 		var BMI=this.getBMI(ewd,WeightK,HeightM).BMI;
 		var LMSin=[],LMSin2=[],LMSin3=[];
@@ -124,7 +147,8 @@ module.exports = {
 			HeightStats:retObj,
 			WeightStats:retObj2,
 			BMI:BMI,
-			BMIStats:retObj3
+			BMIStats:retObj3,
+			DebugStats:{HeightLMS:LMSin,WeightLMS:LMSin2,BMILMS:LMSin3}
 		};
 	}
 
