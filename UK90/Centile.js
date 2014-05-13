@@ -136,7 +136,7 @@ module.exports = {
 		}
 		else
 		{
-			LMSin=[stats.BMI_Female_L,stats.BMI_Female_M,stats.BMI_Female_S];
+			LMSin=[stats.Height_Female_L,stats.Height_Female_M,stats.Height_Female_S];
 			LMSin2=[stats.Weight_Female_L,stats.Weight_Female_M,stats.Weight_Female_S];
 			LMSin3=[stats.BMI_Female_L,stats.BMI_Female_M,stats.BMI_Female_S];
 		}
