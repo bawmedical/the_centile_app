@@ -12,6 +12,14 @@ function suffix(i) {
     }
     return i + "th";
 };
+var centTable =  function(jsoIn,measure) {
+	var tableOut='<table><tr><th>Centile</th><th>Value</th></tr>';
+	for (var row in jsoIn) {
+		tableOut+='<tr><td>'+row+'</td><td>'+Math.round(jsoIn[row])+measure+'</td></tr>'
+	}
+	tableOut+='</table>';
+	return tableOut;
+}
 EWD.application = {
 	name: 'Centile', //this specifies the server code to call
 	timeout: 3600,
@@ -38,9 +46,15 @@ EWD.application = {
 		  var centWeight=Math.round(data.WeightStats.Centile);
 		  var centBMI=Math.round(data.BMIStats.Centile);
 		  $("td#heightcentile").html(suffix(centHeight));
+		  $('#heightPopover').popover("destroy"); //need to clear any existing content
+		  $('#heightPopover').popover({html:true,content:centTable(data.HeightStats.Context,'cm')});
 		  $("td#weightcentile").html(suffix(centWeight));
+		  $('#weightPopover').popover("destroy"); //need to clear any existing content
+		  $('#weightPopover').popover({html:true,content:centTable(data.WeightStats.Context,'kg')});
 		  $("td#bmi").html(Math.round(data.BMI)+" kgm<sup>-2</sup>");
 		  $("td#bmicentile").html(suffix(centBMI));
+		  $('#BMIPopover').popover("destroy"); //need to clear any existing content
+		  $('#BMIPopover').popover({html:true,content:centTable(data.BMIStats.Context,'')});
 		  //add warning colours
 		  if (centHeight > 85 || centHeight < 15) {
 			$("td#heightcentile").addClass('danger')
@@ -65,7 +79,6 @@ $( document ).ready(function() {
   $("#why, #results, #thanks").hide();
   var patientSex = $('form input[name=radios]:checked').val();
   setColourScheme();
-  
   //page striptease slow toggles
   $("#why-link").click(function() {
     $("#why").slideToggle("slow");
