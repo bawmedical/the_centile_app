@@ -67,7 +67,10 @@
 
       <div class="filler"></div>
 
-      <div id="results">
+      <div class="container" id="results">
+	   <div class="row ">
+        <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2" >
+
         <table class="table results-table">
           <tr>
             <td>Height Centile:</td>
@@ -87,20 +90,23 @@
           </tr>
         </table>
         <div class="small-filler"></div>
+	    </div>
+	   </div>
       </div>
 
-      <div id="centileform">
+      <div class="container" id="centileform">
+	    <div class="row ">
+         <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2" >
           <div class="control-group">
             <form class="form-horizontal">
-              <fieldset>
 
               <!-- Form Name -->
-              <legend>calculate a centile</legend>
+              <h3>Calculate a centile</h3>
 
               <!-- Multiple Radios (inline) -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="radios">Sex</label>
-                <div class="col-md-4" id="patient-sex"> 
+                <label class="col-sm-4 control-label" for="radios">Sex</label>
+                <div class="col-sm-6" id="patient-sex"> 
                   <label class="radio-inline" for="radios-0">
                     <input name="radios" id="radios-0" value="Female" type="radio">
                     F
@@ -114,8 +120,8 @@
 
               <!-- Appended Input-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="appendedtext">Age (months)</label>
-                <div class="col-md-4">
+                <label class="col-sm-4 control-label" for="appendedtext">Age (months)</label>
+                <div class="col-sm-6">
                   <div class="input-group">
                     <input id="patient-age" name="appendedtext" class="form-control" placeholder="age in months" required="" type="text">
                     <span class="input-group-addon">months</span>
@@ -125,8 +131,8 @@
               </div>
               <!-- Appended Input-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="appendedtext">Height</label>
-                <div class="col-md-4">
+                <label class="col-sm-4 control-label" for="appendedtext">Height</label>
+                <div class="col-sm-6">
                   <div class="input-group">
                     <input id="patient-height" name="appendedtext" class="form-control" placeholder="height in centimetres" type="text">
                     <span class="input-group-addon">centimetres</span>
@@ -136,8 +142,8 @@
               </div>
               <!-- Appended Input-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="appendedtext">Weight</label>
-                <div class="col-md-4">
+                <label class="col-sm-4 control-label" for="appendedtext">Weight</label>
+                <div class="col-sm-6">
                   <div class="input-group">
                     <input id="patient-weight" name="appendedtext" class="form-control" placeholder="weight in kilograms" type="text">
                     <span class="input-group-addon">kilograms</span>
@@ -147,15 +153,16 @@
               </div>
               <!-- Button -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="singlebutton"></label>
-                <div class="col-md-4">
+                <label class="col-sm-4 control-label" for="singlebutton"></label>
+                <div class="col-sm-6">
                   <button id="calculate-centile" name="singlebutton" class="btn btn-lg btn-default btn-block">Calculate Centile</button>
                 </div>
               </div>
 
-              </fieldset>
             </form>
           </div>
+		  </div>
+		  </div>
         </div> 
 
         <div class="filler"></div>
