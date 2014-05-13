@@ -1,0 +1,70 @@
+body {
+  background-position: center; 
+  background-size: cover;
+  background-repeat: none;
+  background-color: #E8C5E0;
+}
+
+#content {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: normal;
+  margin: 0px auto ;
+}
+
+.nav {
+  background-color: #FBE1ED;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.nav li {
+  display: inline;
+}
+
+.nav a {
+  color: #ED95C1;
+}
+
+.nav ul.pull-right {
+  margin-top: 20px;
+}
+.nav .pull-right a {
+  font-size: 20px;
+  padding: 15px 10px;
+  margin-right: 40px;
+}
+
+.nav .pull-left a {
+  font-size: 48px;
+  font-family: Georgia;
+  padding-left: 0px;
+}
+
+#paypal-donate {
+  text-align: center;
+}
+
+.filler {
+  height: 150px;
+}
+
+.small-filler {
+  height: 50px;
+}
+
+.results-table {
+  margin: 0px auto;
+}
+
+footer li {
+  display: inline;
+  padding: 15px 10px;
+  margin-bottom: 40px;
+}
+
+.legals {
+  margin-top: 40px;
+  font-size: 10px;
+  text-align: center;
+  padding: 5px;
+}
