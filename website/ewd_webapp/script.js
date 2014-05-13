@@ -34,10 +34,27 @@ EWD.application = {
 		  console.log("heightcentile: "+ data.HeightStats.Centile, "weightcentile: "+data.WeightStats.Centile, "BMI: "+data.BMI, "BMIcentile: "+data.BMIStats.Centile);
 
 		  //enter results into table#results
-		  $("td#heightcentile").html(suffix(Math.round(data.HeightStats.Centile)));
-		  $("td#weightcentile").html(suffix(Math.round(data.WeightStats.Centile)));
+		  var centHeight=Math.round(data.HeightStats.Centile);
+		  var centWeight=Math.round(data.WeightStats.Centile);
+		  var centBMI=Math.round(data.BMIStats.Centile);
+		  $("td#heightcentile").html(suffix(centHeight));
+		  $("td#weightcentile").html(suffix(centWeight));
 		  $("td#bmi").html(Math.round(data.BMI)+" kgm<sup>-2</sup>");
-		  $("td#bmicentile").html(suffix(Math.round(data.BMIStats.Centile)));
+		  $("td#bmicentile").html(suffix(centBMI));
+		  //add warning colours
+		  if (centHeight > 85 || centHeight < 15) {
+			$("td#heightcentile").addClass('danger')
+			}
+		  else {$("td#heightcentile").removeClass('danger')};
+		  if (centWeight > 85 || centWeight < 15) {
+			$("td#weightcentile").addClass('danger')
+			}
+		  else {$("td#weightcentile").removeClass('danger')};
+		  if (centBMI > 85 || centBMI < 15) {
+			$("td#bmicentile").addClass('danger')
+			}
+		  else {$("td#bmicentile").removeClass('danger')};
+
 		  $("#results").slideDown("slow");		
 		}
 	}
