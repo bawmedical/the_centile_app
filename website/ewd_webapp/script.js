@@ -1,4 +1,17 @@
 EWD.sockets.log = true; //make this false after testing so socket messages don't appear in the console
+function suffix(i) {
+    var j = i % 10;
+    if (j == 1 && i != 11) {
+        return i + "st";
+    }
+    if (j == 2 && i != 12) {
+        return i + "nd";
+    }
+    if (j == 3 && i != 13) {
+        return i + "rd";
+    }
+    return i + "th";
+};
 EWD.application = {
 	name: 'Centile', //this specifies the server code to call
 	timeout: 3600,
@@ -21,10 +34,10 @@ EWD.application = {
 		  console.log("heightcentile: "+ data.HeightStats.Centile, "weightcentile: "+data.WeightStats.Centile, "BMI: "+data.BMI, "BMIcentile: "+data.BMIStats.Centile);
 
 		  //enter results into table#results
-		  $("td#heightcentile").html(Math.round(data.HeightStats.Centile)+"th");
-		  $("td#weightcentile").html(Math.round(data.WeightStats.Centile)+"th");
+		  $("td#heightcentile").html(suffix(Math.round(data.HeightStats.Centile)));
+		  $("td#weightcentile").html(suffix(Math.round(data.WeightStats.Centile)));
 		  $("td#bmi").html(Math.round(data.BMI)+" kgm<sup>-2</sup>");
-		  $("td#bmicentile").html(Math.round(data.BMIStats.Centile)+"th");
+		  $("td#bmicentile").html(suffix(Math.round(data.BMIStats.Centile)));
 		  $("#results").slideDown("slow");		
 		}
 	}
