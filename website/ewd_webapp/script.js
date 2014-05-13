@@ -106,7 +106,7 @@ $( document ).ready(function() {
 		type: 'getCentiles',
 		params: {
 			ageInYears: Math.floor(($( "#patient-age" ).val()) / 12),
-			ageInMonths: (($( "#patient-age" ).val())) % ($( "#patient-age" ).val()),
+			ageInMonths: ((($( "#patient-age" ).val())) % 12),
 			weightInKg: $( "#patient-weight" ).val(),
 			heightInM: ($( "#patient-height" ).val())/100,
 			sex: $('form input[name=radios]:checked').val()
