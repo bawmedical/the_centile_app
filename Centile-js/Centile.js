@@ -26,8 +26,8 @@ var calcAge = function(y,m,w) {
 	return +(y + calcAge);
 };
 var getStats = function(ewd,age) {
-	if (!centileXIx) var centileXIx = new ewd.mumps.GlobalNode("cpcCentile", ["CentileIx","age"]);
-	if (!centileIx) var centileIx = new ewd.mumps.GlobalNode("cpcCentile", ["Centile"]);
+	if (!centileXIx) var centileXIx = new ewd.mumps.GlobalNode("cpcCentile", ["CentileIx","UK90","age"]);
+	if (!centileIx) var centileIx = new ewd.mumps.GlobalNode("cpcCentile", ["Centile","UK90"]);
 	if (!centileCount) var centileCount = new ewd.mumps.GlobalNode("cpcCentile", ["Count"]);
 	centileCount._value = centileCount._value+1;
 	if (centileXIx.$(age)._hasValue) {
