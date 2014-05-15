@@ -1,17 +1,11 @@
 the_centile_app
 ===============
-A suite of tools for calculating paediatric growth centiles from LMS statistical tables, including a REST API, UI elements, supporting documentation
+A suite of tools for calculating paediatric growth centiles from LMS statistical tables, including a basic scriptology, REST API, UI elements, supporting documentation
 
-* CDC directory contains [mostly superseded, although working] code for calculating centiles from the freely available US CDC LMS tables, we mainly used this for initial development before our license application with the MRC UK came through.
-* UK90 directory contains code for calculating centiles from the UK90 LMS tables:
-    * UK90.js - javascript/node.js implementation
-    * UK90.py - python implementation
-    * UK90.rb - [planned]
-    * UK90_height_weight_bmi.csv - the LMS data (see LICENSE notes regarding the licensing of this data)
-    * Centile.js - EWD/node.js code for the API
-* website to contain a webapp for calculating centiles:
-    * explanatory notes and FAQ for parents, technical FAQ, API documentation
-    * see website for more details
+* Centile-js directory contains UK90.js - basic code in javascript which will return a centile, when given age, sex, height, weight as input. As it is currently written there is no command line usage, it would need to be integrated into a webapp or node.js for use. It is left here as a resource of working statistical code for conversion of LMS tables into centiles.
+* EWD-based-webapp contains the code and all dependencies for the EWD-based web application
+* Mobile-webapp is essentially a fork of the centile_app project with the aim of allowing the calculations to be done in the client device. It's aimed at mobile workers such as hospital doctors.
+* PyCentile contains Python scripts for calculating centiles from LMS data + age, sex, height, weight information. There are two different versions, one for use with the UK90 LMS tables and the other for use with the CDC's USA LMS tables.
 
 * **IMPORTANT: Essential data contained within this app's repository is COPYRIGHTED and is NOT freely distributable. PLEASE ENSURE YOU READ THE LICENSE DOCUMENT FULLY**
 
@@ -26,14 +20,14 @@ Contributors
 * Twitter: @marcus_baw
 * Web: http://www.bawmedical.co.uk
 
-###Paul Rubenstein (biomedical statistician)
-* statistical advice in plain English
-* Python engine for centile lookups
-
 ###Chris Casey (CPC Computer Solutions)
 * API development in EWD/Swagger/node.js
 * AWS cloud hosting
 * Twitter: @ChrisPCasey
+
+###Paul Rubenstein (biomedical statistician)
+* statistical advice in plain English
+* Python engine for centile lookups
 
 ###Rob Dyke (director Tactix4, director openGPSoC-CIC )
 * N3 hosting
