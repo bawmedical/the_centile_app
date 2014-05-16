@@ -52,14 +52,18 @@ body {
   height: 50px;
 }
 
-.results-table {
-  margin: 0px auto;
+#results {
+  display: block;
 }
 
 footer li {
   display: inline;
   padding: 15px 10px;
   margin-bottom: 40px;
+}
+
+#copy-to-clipboard-button {
+  text-align: center;
 }
 
 .legals {

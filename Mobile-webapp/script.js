@@ -1886,12 +1886,27 @@ $( document ).ready(function() {
     //height 0.3m to 2.5m
     //weight 0kg to 250kg
 
-    //enter results into table#results
-    $("td#heightcentile").html(Math.round(getHeightCentile(patientSex, patientAge, patientHeight)));
-    $("td#weightcentile").html(Math.round(getWeightCentile(patientSex, patientAge, patientWeight)));
+    heightCentile = Math.round(getHeightCentile(patientSex, patientAge, patientHeight))
+    weightCentile = Math.round(getWeightCentile(patientSex, patientAge, patientWeight))
     patientBMI = patientWeight/Math.pow((patientHeight/100), 2);
+    bmiCentile = Math.round(getBmiCentile(patientSex, patientAge, patientBMI))
+
+    //enter results into table#results
+    $("td#heightcentile").html(heightCentile);
+    $("td#weightcentile").html(weightCentile);
     $("td#bmi").html(Math.round(patientBMI)+" kgm<sup>-2</sup>");
     $("td#bmicentile").html(Math.round(getBmiCentile(patientSex, patientAge, patientBMI)));
     $("#results").slideDown("slow");
+  });
+
+  //insert the centile values into the clipboard
+  var client = new ZeroClipboard($('#copy-to-clipboard-button'));
+  client.on( 'load', function(client) {
+    client.on( 'datarequested', function(client) {
+      client.setText("Height Centile: " + heightCentile + ", Weight Centile: " + weightCentile + ", Body Mass Index: " + patientBMI + ", BMI Centile :" + bmiCentile);
+    });
+    client.on( 'complete', function(client, args) {
+      alert("Copied text to clipboard: " + args.text );
+    });
   });
 });

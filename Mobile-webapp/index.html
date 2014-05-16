@@ -4,10 +4,12 @@
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="main.css" >
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400, 800' rel='stylesheet' type='text/css'>
     <script src="js/jquery-2.1.1.js" ></script>
+    <script type="text/javascript" src="zeroclipboard/ZeroClipboard.js"></script>
     <script src="script.js"></script>
     <!-- <script src="UK90.js"></script> -->
 
@@ -56,8 +58,9 @@
 
       <div class="filler"></div>
 
-      <div id="results">
-        <table class="table results-table">
+      <div id="results" class="row">
+        <div class="col-md-4"></div>
+        <table class="table results-table col-md-4">
           <tr>
             <td>Height Centile:</td>
             <td id="heightcentile"></td>
@@ -74,9 +77,16 @@
             <td>BMI Centile:</td>
             <td id="bmicentile"></td>
           </tr>
+          <div id="copy-to-clipboard">
+            <a href="#" id="copy-to-clipboard-button">Copy these centiles to Clipboard</a>
+          </div>
         </table>
-        <div class="small-filler"></div>
+        <div class="col-md-4"></div>
       </div>
+
+      <div class="small-filler"></div>
+
+      <div></div>
 
       <div id="centileform">
           <div class="control-group">
@@ -173,7 +183,7 @@
             <li><a id="thanks-link" href="#">THANKS AND ACKNOWLEDGEMENTS</a></li>
           </ul>
           <ul class="pull-right">
-            <li><a href="mailto:info@opengpsoc.org">FEATURE REQUESTS, BUG REPORTS, FEEDBACK</a></li>
+            <li><a href="mailto:info@opengpsoc.org?subject=the_centile_app%20feature%20requests,%20bug%20reports,%20feedback">FEATURE REQUESTS, BUG REPORTS, FEEDBACK</a></li>
           </ul>
         </div>
         <p class="legals">Application code, API code, and written content &copy; copyright 2014 openGPSoC(CIC) a UK Community Interest Company dedicated to open source in the NHS. Company Number 08266350. All software is open source and licensed under GPLv3 license. All other intellectual property is licensed under the CC-BY-SA Creative Commons License.</p>
