@@ -123,3 +123,12 @@ function lmsToCentile(X, LMS) {
     
     return centile;
   }
+
+module.exports = {
+  getData: function(X, LMS, contextCentiles) {
+    return {
+      Centile: lmsToCentile(X, LMS),
+      Context: contextMeasurements(LMS, contextCentiles)
+    }
+  }
+};
