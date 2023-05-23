@@ -1,5 +1,10 @@
-the_centile_app
-===============
+# the_centile_app
+
+> # DEPRECATED PROJECT
+> ### This repository is now **deprecated** and archived as there is a much better alternative available in the form of the RCPCH Digital Growth Charts API, which can be found at https://growth.rcpch.ac.uk/ or within the RCPCH's GitHub organisation https://github.com/rcpch
+
+-----
+
 A suite of tools for calculating paediatric growth centiles from LMS statistical tables, including a basic scriptology, REST API, UI elements, supporting documentation
 
 * Centile-js directory contains UK90.js - basic code in javascript which will return a centile, when given age, sex, height, weight as input. As it is currently written there is no command line usage, it would need to be integrated into a webapp or node.js for use. It is left here as a resource of working statistical code for conversion of LMS tables into centiles.
@@ -9,10 +14,9 @@ A suite of tools for calculating paediatric growth centiles from LMS statistical
 
 * **IMPORTANT: Essential data contained within this app's repository is COPYRIGHTED and is NOT freely distributable. PLEASE ENSURE YOU READ THE LICENSE DOCUMENT FULLY**
 
-Contributors
-------------
+## Contributors
 
-###Dr Marcus Baw (GP, director BawMedical Ltd, director openGPSoC-CIC)
+### Dr Marcus Baw (GP, director BawMedical Ltd, director openGPSoC-CIC)
 * MRC License application for use of UK90 LMS tables
 * Website content & UI (yes my fault)
 * API specification and initial documentation
@@ -20,25 +24,25 @@ Contributors
 * Twitter: @marcus_baw
 * Web: http://www.bawmedical.co.uk
 
-###Chris Casey (CPC Computer Solutions)
+### Chris Casey (CPC Computer Solutions)
 * API development in EWD/Swagger/node.js
 * AWS cloud hosting
 * Twitter: @ChrisPCasey
 
-###Paul Rubenstein (biomedical statistician)
+### Paul Rubenstein (biomedical statistician)
 * statistical advice in plain English
 * Python engine for centile lookups
 
-###Rob Dyke (director Tactix4, director openGPSoC-CIC )
+### Rob Dyke (director Tactix4, director openGPSoC-CIC )
 * N3 hosting
 * Twitter: @robdykedotcom
 * Web: http://www.tactix4.com
 
-###NHSHackDay Google Group contributors (thread: http://goo.gl/r8EiyN)
+### NHSHackDay Google Group contributors (thread: http://goo.gl/r8EiyN)
 * feature requests & general support
 
-Acknowledgements
-----------------
+## Acknowledgements
+
 * Professor Tim Cole (https://iris.ucl.ac.uk/iris/browse/profile?upi=TCOLE39) who originally developed the LMS tables.
 * the Medical Research Council (http://www.mrc.ac.uk/index.htm), whom are the copyright owners of the UK90 LMS Tables and who very kindly have provided us with a free license to use them for non-profit purposes in an open source app.
 * the Centers for Disease Control (http://www.cdc.gov/), who openly publish their LMS tables and formulae (http://www.cdc.gov/growthcharts/percentile_data_files.htm), which gave us an advance test-bed for building the Python centile engine, and gave us some important pointers as to how to do the conversion from measurement to centile.
